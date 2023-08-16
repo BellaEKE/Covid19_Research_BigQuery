@@ -1,0 +1,26 @@
+To calculate the infection rate by country using the COVID-19 research dataset on BigQuery, you would typically need to perform the following steps:
+
+Access the Dataset: Log in to your Google Cloud account and access the COVID-19 research dataset on BigQuery. Make sure you have the necessary permissions to query the dataset.
+
+Identify Relevant Tables: Explore the dataset and identify the tables that contain information about COVID-19 cases and country-level data. Common fields you might encounter include "country," "date," "cases," "deaths," and "population."
+
+Write SQL Query: Write a SQL query that calculates the infection rate for each country. The infection rate is typically calculated as the total number of confirmed cases divided by the population, then multiplied by 100 to get a percentage.
+
+Here's a simplified example of what the SQL query might look like:
+
+SELECT
+  country,
+  SUM(cases) AS total_cases,
+  population,
+  (SUM(cases) / population) * 100 AS infection_rate
+FROM
+  your_dataset.your_table
+WHERE
+  date = '2021-09-01' -- Specify the date for which you want to calculate the infection rate
+GROUP BY
+  country, population
+ORDER BY
+  infection_rate DESC;
+In this example, replace your_dataset with the name of the dataset containing the COVID-19 data and your_table with the specific table name containing the relevant data. Adjust the date and any other fields as needed.
+
+Run the Query: Execute the SQL query on BigQuery to retrieve the infection rate by country for the specified date.
